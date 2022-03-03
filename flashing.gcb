@@ -28,14 +28,19 @@
 '  #chip mega328p         'Uncomment to simply use the AVR chipset
 '  #chip LGT8F328P        'Uncomment to simply use the LGT chipset
 
+#define led PortB.5
 
-' ----- Main body of program commences here.
-Do Forever
 
+sub light_chip(time1 as Word, time2 as Word)
     'Lighten Arduinos onboard LED for 100 milliseconds:
-    PulseOut PortB.5, 100 ms
+    PulseOut led, time1 ms
 
     'Then wait 900 milliseconds after LED goes off:
-    Wait 900 ms
+    Wait time2 ms
+end sub
+
+dir led out
+Do Forever
+  light_chip(100, 900)
 
 Loop
