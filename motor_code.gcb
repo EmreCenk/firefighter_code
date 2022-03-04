@@ -1,0 +1,93 @@
+
+
+
+
+
+
+' ----- Configuration
+'Make into a comment to use the AVR chipset
+#CHIP 16f887
+
+
+' PORTS FOR MOTOR 1: (change accordingly when wiring)
+#define m1port1 PortB.6
+#define m1port2 PortB.7
+
+' PORTS FOR MOTOR 2
+#define m2port1 PortB.4
+#define m2port2 PortB.5
+
+
+' setting the direction of the motors
+dir m1port1 out
+dir m1port2 out
+dir m2port1 out
+dir m2port2 out
+
+
+' MOTOR 1 COMMANDS:
+sub m1_forward
+  set m1port1 ON
+  set m1port2 OFF
+end sub
+
+sub m1_backwards
+  set m1port1 OFF
+  set m1port2 ON
+end sub
+
+sub m1_reset
+  set m1port1 OFF
+  set m1port2 OFF
+end sub
+
+
+' MOTOR 2 COMMANDS:
+sub m2_forward
+  set m2port1 ON
+  set m2port2 OFF
+end sub
+
+sub m2_backwards
+  set m2port1 OFF
+  set m2port2 ON
+end sub
+
+sub m2_reset
+  set m2port1 OFF
+  set m2port2 OFF
+end sub
+
+'
+sub light_chip(time1 as Word, time2 as Word)
+    'Lighten Arduinos onboard LED for 100 milliseconds:
+    PulseOut led, time1 ms
+
+    'Then wait 900 milliseconds after LED goes off:
+    Wait time2 ms
+end sub
+
+
+
+Do Forever
+  m1_forward
+  Wait 1000 ms
+
+  m1_backwards
+  Wait 1000 ms
+
+  m1_reset
+  Wait 1000 ms
+
+
+  'now testing motor 2
+  m1_forward
+  Wait 1000 ms
+
+  m1_backwards
+  Wait 1000 ms
+
+  m1_reset
+  Wait 1000 ms
+
+Loop
