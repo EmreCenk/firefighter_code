@@ -10,12 +10,12 @@
 
 
 ' PINS FOR MOTOR 1: (change accordingly when wiring)
-#define m1port1 PortB.6
-#define m1port2 PortB.7
+#define m1port1 PortB.1
+#define m1port2 PortB.2
 
 ' PINS FOR MOTOR 2
-#define m2port1 PortB.4
-#define m2port2 PortB.5
+#define m2port1 PortB.3
+#define m2port2 PortB.4
 
 
 ' setting the direction of the pins
