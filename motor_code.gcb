@@ -10,12 +10,12 @@
 
 
 ' PINS FOR MOTOR 1: (change accordingly when wiring)
-#define m1port1 PortC.0
-#define m1port2 PortC.1
+#define m1port1 PortB.0
+#define m1port2 PortB.1
 
 ' PINS FOR MOTOR 2
-#define m2port1 PortC.2
-#define m2port2 Portc.3
+#define m2port1 PortB.2
+#define m2port2 PortB.3
 
 
 ' setting the direction of the pins
@@ -27,16 +27,26 @@ dir m2port2 out
 
 ' MOTOR 1 COMMANDS:
 sub m1_forward
+
+'  dir m1port1 in
   set m1port1 ON
+
+'  dir m1port2 out
   set m1port2 OFF
 end sub
 
 sub m1_backwards
+
+'  dir m1port1 out
   set m1port1 OFF
+
+'  dir m1port2 in
   set m1port2 ON
 end sub
 
 sub m1_reset
+'  dir m1port1 out
+'  dir m1port2 out
   set m1port1 OFF
   set m1port2 OFF
 end sub
@@ -49,8 +59,11 @@ sub m2_forward
 end sub
 
 sub m2_backwards
+
   set m2port1 OFF
+
   set m2port2 ON
+
 end sub
 
 sub m2_reset
@@ -70,24 +83,57 @@ end sub
 
 
 Do Forever
-  m1_forward
+
+  PulseOut PortB.5, 1000 ms
+  wait 1000 ms
+
+  m1_reset()
   Wait 1000 ms
 
-  m1_backwards
-  Wait 1000 ms
+  m1_forward()
+  wait 1000 ms
 
-  m1_reset
-  Wait 1000 ms
+  m1_backwards()
+  wait 1000 ms
+
+  m1_reset()
+  wait 100 ms
 
 
-  'now testing motor 2
-  m1_forward
-  Wait 1000 ms
 
-  m1_backwards
-  Wait 1000 ms
 
-  m1_reset
-  Wait 1000 ms
+  m2_reset()
+  wait 1000 ms
+
+  m2_forward()
+  wait 1000 ms
+
+  m2_backwards()
+  wait 1000 ms
+
+  m2_reset()
+  wait 100 ms
+
+
+
+'  m1_forward
+'  Wait 1000 ms
+'
+'  m1_backwards
+'  Wait 1000 ms
+'
+'  m1_reset
+'  Wait 1000 ms
+'
+'
+'  'now testing motor 2
+'  m2_forward
+'  Wait 1000 ms
+'
+'  m2_backwards
+'  Wait 1000 ms
+'
+'  m2_reset
+'  Wait 1000 ms
 
 Loop
