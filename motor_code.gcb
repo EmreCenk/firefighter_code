@@ -27,48 +27,35 @@ dir m2port2 out
 
 ' MOTOR 1 COMMANDS:
 sub m1_forward
-
-'  dir m1port1 in
-  set m1port1 ON
-
-'  dir m1port2 out
-  set m1port2 OFF
+  m1port1 = 1
+  m1port2 = 0
 end sub
 
 sub m1_backwards
-
-'  dir m1port1 out
-  set m1port1 OFF
-
-'  dir m1port2 in
-  set m1port2 ON
+  m1port1 = 0
+  m1port2 = 1
 end sub
 
 sub m1_reset
-'  dir m1port1 out
-'  dir m1port2 out
-  set m1port1 OFF
-  set m1port2 OFF
+  m1port1 = 0
+  m1port2 = 0
 end sub
 
 
 ' MOTOR 2 COMMANDS:
 sub m2_forward
-  set m2port1 ON
-  set m2port2 OFF
+  m2port1 = 1
+  m2port2 = 0
 end sub
 
 sub m2_backwards
-
-  set m2port1 OFF
-
-  set m2port2 ON
-
+  m2port1 = 0
+  m2port2 = 1
 end sub
 
 sub m2_reset
-  set m2port1 OFF
-  set m2port2 OFF
+  m2port1 = 0
+  m2port2 = 0
 end sub
 
 '
