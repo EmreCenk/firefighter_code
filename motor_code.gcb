@@ -26,7 +26,7 @@ dir m2port2 out
 
 
 ' MOTOR 1 COMMANDS:
-sub m1_forward
+sub m1_forwards
   m1port1 = 1
   m1port2 = 0
 end sub
@@ -43,7 +43,7 @@ end sub
 
 
 ' MOTOR 2 COMMANDS:
-sub m2_forward
+sub m2_forwards
   m2port1 = 1
   m2port2 = 0
 end sub
@@ -71,35 +71,27 @@ end sub
 
 Do Forever
 
-  PulseOut PortB.5, 1000 ms
-  wait 1000 ms
 
   m1_reset()
+  m2_reset()
   Wait 1000 ms
 
-  m1_forward()
+  m1_forwards()
+  m2_forwards()
   wait 1000 ms
 
   m1_backwards()
-  wait 1000 ms
-
-  m1_reset()
-  wait 100 ms
-
-
-
-
-  m2_reset()
-  wait 1000 ms
-
-  m2_forward()
-  wait 1000 ms
-
   m2_backwards()
   wait 1000 ms
 
-  m2_reset()
-  wait 100 ms
+  m1_forwards()
+  m2_backwards()
+  wait 1000 ms
+
+  m1_backwards()
+  m2_forwards()
+  wait 1000 ms
+
 
 
 
@@ -124,3 +116,4 @@ Do Forever
 '  Wait 1000 ms
 
 Loop
+End
