@@ -1,0 +1,13 @@
+#CHIP 16f887
+
+#define LED PortB.0
+dir LED out
+
+Do Forever
+  set LED on
+  Wait 1000 ms
+  set LED off
+  Wait 1000 ms
+Loop
+
+End
