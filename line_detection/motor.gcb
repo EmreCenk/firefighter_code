@@ -1,0 +1,24 @@
+
+#CHIP 16f887
+
+#define m1Positive PortB.0
+#define m1Negative PortB.1
+
+#define m2Positive PortB.2
+#define m2Negative PortB.3
+
+dir m1Positive out
+dir m1Negative out
+dir m2Positive out
+dir m2Negative out
+
+Do Forever
+  ' this will turn both motor just forwards
+  set m1Positive on
+  set m1Negative off
+
+  set m2Positive on
+  set m2Negative off
+
+Loop
+End
