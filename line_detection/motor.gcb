@@ -20,5 +20,33 @@ Do Forever
   set m2Positive on
   set m2Negative off
 
+  wait 3000 ms
+
+  ' this will turn left
+  set m1Positive off
+  set m1Negative on
+
+  set m2Positive on
+  set m2Negative off
+
+  wait 3000 ms
+
+  ' this will turn right
+  set m1Positive on
+  set m1Negative off
+
+  set m2Positive off
+  set m2Negative on
+
+  wait 3000 ms
+
+  ' this will go backwards
+  set m1Positive off
+  set m1Negative on
+
+  set m2Positive off
+  set m2Negative on
+
+  wait 3000 ms
 Loop
 End

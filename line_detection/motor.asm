@@ -12,6 +12,14 @@
 
 ;********************************************************************************
 
+;Set aside memory locations for variables
+DELAYTEMP                        EQU 112
+DELAYTEMP2                       EQU 113
+SYSWAITTEMPMS                    EQU 114
+SYSWAITTEMPMS_H                  EQU 115
+
+;********************************************************************************
+
 ;Vectors
 	ORG	0
 	pagesel	BASPROGRAMSTART
@@ -53,6 +61,57 @@ SysDoLoop_S1
 	bsf	PORTB,2
 ;set m2Negative off
 	bcf	PORTB,3
+;wait 3000 ms
+	movlw	184
+	movwf	SysWaitTempMS
+	movlw	11
+	movwf	SysWaitTempMS_H
+	call	Delay_MS
+;this will turn left
+;set m1Positive off
+	bcf	PORTB,0
+;set m1Negative on
+	bsf	PORTB,1
+;set m2Positive on
+	bsf	PORTB,2
+;set m2Negative off
+	bcf	PORTB,3
+;wait 3000 ms
+	movlw	184
+	movwf	SysWaitTempMS
+	movlw	11
+	movwf	SysWaitTempMS_H
+	call	Delay_MS
+;this will turn right
+;set m1Positive on
+	bsf	PORTB,0
+;set m1Negative off
+	bcf	PORTB,1
+;set m2Positive off
+	bcf	PORTB,2
+;set m2Negative on
+	bsf	PORTB,3
+;wait 3000 ms
+	movlw	184
+	movwf	SysWaitTempMS
+	movlw	11
+	movwf	SysWaitTempMS_H
+	call	Delay_MS
+;this will go backwards
+;set m1Positive off
+	bcf	PORTB,0
+;set m1Negative on
+	bsf	PORTB,1
+;set m2Positive off
+	bcf	PORTB,2
+;set m2Negative on
+	bsf	PORTB,3
+;wait 3000 ms
+	movlw	184
+	movwf	SysWaitTempMS
+	movlw	11
+	movwf	SysWaitTempMS_H
+	call	Delay_MS
 ;Loop
 	goto	SysDoLoop_S1
 SysDoLoop_E1
@@ -61,6 +120,27 @@ SysDoLoop_E1
 BASPROGRAMEND
 	sleep
 	goto	BASPROGRAMEND
+
+;********************************************************************************
+
+Delay_MS
+	incf	SysWaitTempMS_H, F
+DMS_START
+	movlw	4
+	movwf	DELAYTEMP2
+DMS_OUTER
+	movlw	165
+	movwf	DELAYTEMP
+DMS_INNER
+	decfsz	DELAYTEMP, F
+	goto	DMS_INNER
+	decfsz	DELAYTEMP2, F
+	goto	DMS_OUTER
+	decfsz	SysWaitTempMS, F
+	goto	DMS_START
+	decfsz	SysWaitTempMS_H, F
+	goto	DMS_START
+	return
 
 ;********************************************************************************
 
