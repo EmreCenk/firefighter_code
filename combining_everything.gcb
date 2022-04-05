@@ -1,0 +1,164 @@
+
+
+
+
+#CHIP 16f887
+
+'LCD setup:
+#define LCD_IO 4
+#define LCD_Speed OPTIMAL 'defines the characters per second on the LCD
+#define LCD_RW PortD.1
+#define LCD_RS PortD.0
+#define LCD_Enable PortD.2
+#define LCD_DB7 PortD.7
+#define LCD_DB6 PortD.6
+#define LCD_DB5 PortD.5
+#define LCD_DB4 PortD.4
+
+' LED setup:
+#define led_port PortB.5
+dir led_port out
+
+' wall sensors:
+#define wall_sensor_front AN2
+#define wall_sensor_left AN3
+
+' flame sensor
+#define flame_sensor AN0
+
+' line detection
+#define line_port PortB.4
+
+' motor setup:
+#define m1port1 PortB.0
+#define m1port2 PortB.1
+#define m2port1 PortB.2
+#define m2port2 PortB.3
+dir m1port1 out
+dir m1port2 out
+dir m2port1 out
+dir m2port1 out
+
+
+' END OF DEFINING PORTS
+
+' motor code:
+sub m1_forward
+  m1port1 = 1
+  m1port2 = 0
+end sub
+
+sub m1_backwards
+  m1port1 = 0
+  m1port2 = 1
+end sub
+
+sub m1_reset
+  m1port1 = 0
+  m1port2 = 0
+end sub
+
+sub m2_forward
+  m2port1 = 1
+  m2port2 = 0
+end sub
+
+sub m2_backwards
+  m2port1 = 0
+  m2port2 = 1
+end sub
+
+sub m2_reset
+  m2port1 = 0
+  m2port2 = 0
+end sub
+
+
+sub bot_forwards(time1 as Word)
+  m1_forward
+  m2_forward
+  Wait time1 ms
+end sub
+
+
+sub bot_backwards(time1 as Word)
+  m1_backwards
+  m2_backwards
+  Wait time1 ms
+end sub
+
+sub bot_left(time1 as Word)
+  m1_forward
+  m2_backwards
+  Wait time1 ms
+end sub
+
+sub bot_right(time1 as Word)
+  m1_backwards
+  m2_forward
+  Wait time1 ms
+end sub
+
+sub bot_reset_motors(time1 as Word)
+  m1_reset
+  m2_reset
+  Wait time1 ms
+end sub
+
+sub forward_till_wall_hit(distance_threshold as Word)
+' BLUE FUNCTION (see proposal for more info)
+' goes forward until it hits a wall
+' it gets distance_threshold cm close to the wall before it stops
+  update_front_wall_value()
+
+  do until distance_front < distance_threshold
+    update_front_wall_value()
+    cls()
+    locate(0,0)
+    print distance_front
+    locate(1,0)
+    print(distance_threshold)
+    bot_forwards(0)
+    Wait 100 ms
+  loop
+
+  bot_reset_motors(0)
+
+
+end sub
+
+sub blow_out_candle(limit as Word)
+  bot_right(0)
+
+  flame_value = ReadAd(flame_sensor)
+
+  do until flame_value < limit
+    flame_value = ReadAd(flame_sensor)
+    Wait 400 ms
+  loop
+  bot_reset_motors(0)
+  locate(0,0)
+  print("PUTTING OUT FLAME")
+  'TODO: OPEN FAN:
+
+end sub
+sub update_front_wall_value
+ ' updates the distance from the front sensor the the nearest wall
+  value_front = ReadAD (wall_sensor_left)
+  distance_front = (((6787/(value_front-2)))-4)/5
+end sub
+
+Do Forever'    r = (((6787/(v-2)))-4)/5
+'  forward_till_wall_hit(15)
+'  cls()
+  blow_out_candle(200)
+
+  cls()
+  locate(1,0)
+  print "urmom3"
+
+  Wait 1009 ms
+
+loop
+
+End

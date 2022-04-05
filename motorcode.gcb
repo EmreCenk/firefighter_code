@@ -1,0 +1,102 @@
+
+
+
+#CHIP 16f887
+
+
+#define m1port1 PortB.0
+#define m1port2 PortB.1
+
+#define m2port1 PortB.2
+#define m2port2 PortB.3
+
+dir m1port1 out
+dir m1port2 out
+dir m2port1 out
+dir m2port1 out
+
+
+sub m1_forward
+  m1port1 = 1
+  m1port2 = 0
+end sub
+
+sub m1_backwards
+  m1port1 = 0
+  m1port2 = 1
+end sub
+
+sub m1_reset
+  m1port1 = 0
+  m1port2 = 0
+end sub
+
+sub m2_forward
+  m2port1 = 1
+  m2port2 = 0
+end sub
+
+sub m2_backwards
+  m2port1 = 0
+  m2port2 = 1
+end sub
+
+sub m2_reset
+  m2port1 = 0
+  m2port2 = 0
+end sub
+
+
+sub bot_forward(time1 as Word)
+  m1_forward
+  m2_forward
+  Wait time1 ms
+end sub
+
+
+sub bot_backwards(time1 as Word)
+  m1_backwards
+  m2_backwards
+  Wait time1 ms
+end sub
+
+sub bot_left(time1 as Word)
+  m1_forward
+  m2_backwards
+  Wait time1 ms
+end sub
+
+sub bot_right(time1 as Word)
+  m1_backwards
+  m2_forward
+  Wait time1 ms
+end sub
+
+sub bot_reset(time1 as Word)
+  m1_reset
+  m2_reset
+  Wait time1 ms
+end sub
+
+
+#define led_port PortB.5
+#define line_port PortB.4
+dir line_port in
+dir led_port out
+
+
+do forever
+
+
+  if line_port then
+    bot_backwards(0)
+    set led_port off
+  else
+    bot_forward(0)
+    set led_port on
+  end if
+
+
+
+loop
+End

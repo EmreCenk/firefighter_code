@@ -1,0 +1,51 @@
+
+
+
+
+#CHIP 16f887
+
+#define LCD_IO 4
+#define LCD_Speed OPTIMAL 'defines the characters per second on the LCD
+
+#define LCD_RW PortD.1
+#define LCD_RS PortD.0
+
+#define LCD_Enable PortD.2
+
+#define LCD_DB7 PortD.7
+#define LCD_DB6 PortD.6
+#define LCD_DB5 PortD.5
+#define LCD_DB4 PortD.4
+
+
+#define led_port PortB.5
+dir led_port out
+
+
+
+
+
+#define wall_sensor_front AN2
+#define wall_sensor_left AN3
+
+#define flame_sensor AN0
+
+
+Do Forever'    r = (((6787/(v-2)))-4)/5
+  value = ReadAD (wall_sensor_left)
+  value2 = ReadAd(wall_sensor_front)
+  value3 = ReadAd(flame_sensor)
+  cls()
+  locate(0,0)
+  print value3
+
+  if value3<200 then
+    locate(1,0)
+    print("FLAME")
+  end if
+
+  Wait 500 ms
+
+loop
+
+End

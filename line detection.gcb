@@ -1,0 +1,21 @@
+
+
+
+#CHIP 16f887
+
+#define led_port PortB.e
+#define line_port PortB.4
+dir line_port in
+dir led_port out
+
+do forever
+
+  if line_port then
+    set led_port off
+  else
+    set led_port on
+  end if
+
+
+
+loop

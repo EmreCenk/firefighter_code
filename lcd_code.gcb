@@ -1,0 +1,50 @@
+
+
+
+#CHIP 16f887
+
+#define LCD_IO 4
+#define LCD_Speed OPTIMAL 'defines the characters per second on the LCD
+
+#define LCD_RW PortD.1
+#define LCD_RS PortD.0
+
+#define LCD_Enable PortD.2
+
+#define LCD_DB7 PortD.7
+#define LCD_DB6 PortD.6
+#define LCD_DB5 PortD.5
+#define LCD_DB4 PortD.4
+
+
+#define led_port PortB.5
+dir led_port out
+
+
+sub urmom()
+  locate(0, 0)
+  print"'Nice cock'"
+  locate(1, 0)
+  print" -Your Mother"
+
+  wait 2000 ms
+  cls()
+  locate(0, 0)
+  print"Damn bro, got"
+
+  locate(1, 0)
+  print"everyone laughing "
+
+  wait 2000 ms
+  cls()
+
+end sub
+
+Do Forever
+  set led_port on
+  urmom()
+  set led_port off
+
+loop
+
+End

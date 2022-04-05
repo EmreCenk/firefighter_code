@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Compilation Report</title>
+</head>
+<body>
+<h1>Compilation Report</h1>
+<p>Compiler Version (YYYY-MM-DD): 0.98.06 2019-06-12 (Windows 32 bit)</p>
+<h2>Compilation time</h2>
+<p> (Compile time: 1.125 seconds)</p>
+<p> (Assembly time: 0.0625 seconds)</p>
+<p> (Download time: 0 seconds)</p>
+<p> (Total time: 1.1875 seconds)</p>
+<h2>Chip resource usage:</h2>
+<p>Chip Model: 16F887</p>
+<p>Program Memory: 569/8192 words (6.95%)</p>
+<p>RAM: 57/368 bytes (15.49%)</p>
+<h2>RAM Allocation</h2>
+<table border="1">
+</table>
+<h2>Subroutines</h2>
+<table border="1">
+<tr><th>Name</th><th>Code Size (lines)</th><th>Compiled Size (words)</th><th>Page</th><th>Outgoing calls</th></tr>
+<tr><td>Main</td><td>31</td><td>44</td><td>1</td><td>INITLCD(10), SYSREADSTRING(1), Delay_MS(1), PRINT(1), LOCATE(1), CLS(1), BLOW_OUT_CANDLE(1), INITSYS(57)</td></tr>
+<tr><td>M1_BACKWARDS</td><td>2</td><td>3</td><td>1</td><td></td></tr>
+<tr><td>M1_RESET</td><td>2</td><td>3</td><td>1</td><td></td></tr>
+<tr><td>M2_FORWARD</td><td>2</td><td>3</td><td>1</td><td></td></tr>
+<tr><td>M2_RESET</td><td>2</td><td>3</td><td>1</td><td></td></tr>
+<tr><td>BOT_RIGHT</td><td>3</td><td>7</td><td>1</td><td>Delay_MS(1), M2_FORWARD(1), M1_BACKWARDS(1)</td></tr>
+<tr><td>BOT_RESET_MOTORS</td><td>3</td><td>7</td><td>1</td><td>Delay_MS(1), M2_RESET(1), M1_RESET(1)</td></tr>
+<tr><td>BLOW_OUT_CANDLE</td><td>9</td><td>48</td><td>1</td><td>SYSREADSTRING(1), Delay_MS(1), SYSCOMPLESSTHAN16(1), PRINT(1), LOCATE(1), BOT_RESET_MOTORS(1), READAD(2), BOT_RIGHT(1)</td></tr>
+<tr><td>READAD</td><td>59</td><td>57</td><td>1</td><td>Delay_10US(1)</td></tr>
+<tr><td>LOCATE</td><td>7</td><td>24</td><td>1</td><td>SYSMULTSUB(1), Delay_10US(1), LCDNORMALWRITEBYTE(1)</td></tr>
+<tr><td>CLS</td><td>5</td><td>14</td><td>1</td><td>Delay_10US(1), Delay_MS(1), LCDNORMALWRITEBYTE(2)</td></tr>
+<tr><td>INITLCD</td><td>271</td><td>86</td><td>1</td><td>Delay_MS(4), CLS(1), LCDNORMALWRITEBYTE(3), LCDREADY(1)</td></tr>
+<tr><td>PRINT</td><td>8</td><td>31</td><td>1</td><td>LCDNORMALWRITEBYTE(1)</td></tr>
+<tr><td>LCDREADY</td><td>46</td><td>33</td><td>1</td><td>Delay_10US(4)</td></tr>
+<tr><td>LCDNORMALWRITEBYTE</td><td>285</td><td>68</td><td>1</td><td>LCDREADY(1)</td></tr>
+<tr><td>INITSYS</td><td>702</td><td>29</td><td>1</td><td></td></tr>
+<tr><td>SYSREADSTRING</td><td>101</td><td>28</td><td>1</td><td></td></tr>
+<tr><td>SYSMULTSUB</td><td>39</td><td>12</td><td>1</td><td></td></tr>
+<tr><td>SYSCOMPLESSTHAN16</td><td>38</td><td>15</td><td>1</td><td></td></tr>
+<tr><td>Delay_10US</td><td>0</td><td>8</td><td>1</td><td></td></tr>
+<tr><td>Delay_MS</td><td>0</td><td>14</td><td>1</td><td></td></tr>
+<tr><td>SysStringTables</td><td>0</td><td>32</td><td>1</td><td></td></tr>
+</table>
+</body>
+</html>
